@@ -1,0 +1,4 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/UISettings/ProjectUSS.uss?fileID=7433441132597879392&amp;guid=8497625c5a0381a44b74d88cd3e9eb04&amp;type=3#ProjectUSS"/>
+    <ui:VisualElement name="BG" class="bg" style="flex-grow: 1;"/>
+</ui:UXML>

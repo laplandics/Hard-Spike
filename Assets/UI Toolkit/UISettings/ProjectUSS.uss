@@ -1,0 +1,6 @@
+:root {
+}
+
+.bg {
+    background-color: rgb(70, 70, 70);
+}
