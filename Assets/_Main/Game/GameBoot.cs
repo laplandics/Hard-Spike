@@ -1,6 +1,7 @@
 ﻿using Cmd;
 using Core;
 using R3;
+using Settings;
 using State;
 using UnityEngine;
 using Utils;
@@ -19,6 +20,10 @@ namespace Game
                 c.Resolve<IProjectStateProvider>().ProjectProxy));
             
             c.Register(_ => new Cam("GameCamera"));
+            c.Register(_ => new GridGenerator(
+                c.Resolve<ISettingsProvider>().ProjectSettings), true);
+            c.Register(_ => new MapCreator(
+                c.Resolve<GridGenerator>()), true);
             c.Register(_ => new StructureConstructor(
                 c.Resolve<IProjectStateProvider>().ProjectProxy.Structures,
                 c.Resolve<ICommandProcessor>()), true);
@@ -26,6 +31,7 @@ namespace Game
             c.Register(_ => new WorldSceneRoot(), true);
             c.Register(_ => new GameUiRootVm(), true);
             c.Register(_ => new GameWorldRootVm(
+                c.Resolve<MapCreator>(),
                 c.Resolve<StructureConstructor>()), true);
             
             c.Resolve<UiProjectRoot>().AddUi(
@@ -34,6 +40,8 @@ namespace Game
                 c.Resolve<GameWorldRootVm>());
             
             c.Resolve<Cam>().Instantiate();
+            c.Resolve<MapCreator>().CreateMap();
+            
             
             Resources.UnloadUnusedAssets();
         }

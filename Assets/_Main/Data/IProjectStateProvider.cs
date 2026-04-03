@@ -1,4 +1,5 @@
 ﻿using R3;
+using Settings;
 
 namespace State
 {
@@ -6,7 +7,7 @@ namespace State
     {
         public Proxy.Project ProjectProxy { get; }
 
-        public Observable<bool> LoadProjectState();
+        public Observable<bool> LoadProjectState(ISettingsProvider settingsProvider);
         public Observable<bool> SaveProjectState();
         public Observable<bool> ResetProjectState();
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Constant;
 using UnityEngine;
 
 namespace State
@@ -6,7 +7,7 @@ namespace State
     [Serializable]
     public class Structure : Entity
     {
-        public string typeKey;
+        public Structures typeKey;
         public Vector3 position;
     }
 }

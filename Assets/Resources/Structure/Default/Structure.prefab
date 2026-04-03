@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8391460642918458581}
   - component: {fileID: 3687309841187400916}
-  - component: {fileID: 1004988884704639376}
-  - component: {fileID: 977188171074067759}
+  - component: {fileID: -8164259926947035616}
+  - component: {fileID: -2529929753401473174}
   m_Layer: 0
   m_Name: Structure
   m_TagString: Untagged
@@ -46,15 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9cb6d242f964b178f5b404a7896402a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.StructureBinder
---- !u!33 &1004988884704639376
+--- !u!33 &-8164259926947035616
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4147475383205816018}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &977188171074067759
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &-2529929753401473174
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

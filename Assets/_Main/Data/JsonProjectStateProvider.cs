@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using R3;
+using Settings;
 using UnityEngine;
 
 namespace State
@@ -10,25 +11,27 @@ namespace State
         public Proxy.Project ProjectProxy { get; private set; }
         
         private Project _projectState;
+        private ISettingsProvider _settingsProvider;
+        
         private static string Path => Application.persistentDataPath + Constant.Paths.PROJECT_STATE_PATH;
         
-        public Observable<bool> LoadProjectState()
+        public Observable<bool> LoadProjectState(ISettingsProvider settingsProvider)
         {
             ProjectProxy = null;
+            _settingsProvider = settingsProvider;
 
 #if UNITY_EDITOR
             
             Debug.LogWarning("Remove temporal editor code (Reset state)");
             ResetProjectState();
             
-#endif            
+#endif
             
             if (!File.Exists(Path)) return ResetProjectState();
             
             var json = File.ReadAllText(Path);
             _projectState = JsonUtility.FromJson<Project>(json);
             ProjectProxy = new Proxy.Project(_projectState);
-            
             return Observable.Return(true);
         }
 
@@ -49,12 +52,25 @@ namespace State
 
         private void CreateProjectState()
         {
-            Debug.LogWarning("Move new project state creation to settings");
             _projectState = new Project
             {
-                preferences = new Preferences { vSync = 1, fps = -1, },
-                structures = new List<Structure>(),
+                preferences = new Preferences
+                {
+                    vSync = _settingsProvider.ApplicationSettings.vSync,
+                    fps = _settingsProvider.ApplicationSettings.fps
+                },
+                
+                structures = new List<Structure>
+                {
+                    new()
+                    {
+                        id = _settingsProvider.ProjectSettings.initialStructure.id,
+                        typeKey = _settingsProvider.ProjectSettings.initialStructure.typeKey,
+                        position = Vector3.zero
+                    }
+                }
             };
+            
             ProjectProxy = new Proxy.Project(_projectState);
         }
     }

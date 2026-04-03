@@ -7,7 +7,9 @@ namespace Game
 {
     public class GameWorldRootBinder : MonoBehaviour
     {
+        private MapBinder _mapBinder;
         private readonly Dictionary<string, StructureBinder> _structureBindersMap = new();
+        
         private CompositeDisposable _disposables = new();
         private GameWorldRootVm _vm;
         
@@ -15,15 +17,29 @@ namespace Game
         {
             _vm = vm;
 
+            _disposables.Add(_vm.MapVm.Where(map => map != null).Subscribe(CreateMap));
+            _disposables.Add(_vm.MapVm.Where(map => map == null).Subscribe(DestroyMap));
+            
             foreach (var structureVm in _vm.StructureVms) AddStructure(structureVm);
             _disposables.Add(_vm.StructureVms.ObserveAdd().Subscribe(e => AddStructure(e.Value)));
             _disposables.Add(_vm.StructureVms.ObserveRemove().Subscribe(e => RemoveStructure(e.Value)));
         }
 
+        private void CreateMap(MapVm mapVm)
+        {
+            mapVm.OnAdd(transform);
+            _mapBinder = mapVm.Binder;
+        }
+
+        private void DestroyMap(MapVm mapVm)
+        {
+            Destroy(_mapBinder);
+        }
+        
         private void AddStructure(StructureVm structureVm)
         {
             structureVm.OnAdd(transform);
-            var structureBinder = structureVm.Binder as StructureBinder;
+            var structureBinder = structureVm.Binder;
             _structureBindersMap.Add(structureVm.Id, structureBinder);
         }
 

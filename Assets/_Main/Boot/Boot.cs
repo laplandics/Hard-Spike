@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Cmd;
 using Core;
 using Game;
 using Menu;
 using R3;
+using Settings;
 using State;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,6 +27,7 @@ namespace Boot
             _rootDi.Register(_ => new Coroutines(), true);
             _rootDi.Register(_ => new UiProjectRoot(), true);
             _rootDi.Register(_ => new Cam("BootCamera"), true);
+            _rootDi.Register<ISettingsProvider>(_ => new SoSettingsProvider(), true);
             _rootDi.Register<IProjectStateProvider>(_ => new JsonProjectStateProvider(), true);
             _rootDi.Register<ICommandProcessor>(_ => new CommandProcessor(), true);
             
@@ -53,8 +56,15 @@ namespace Boot
 
         private IEnumerator BeforeLoadScene()
         {
+            var loadSettingsRequest = _rootDi.Resolve<ISettingsProvider>().LoadSettings();
+            yield return new WaitUntil(() => loadSettingsRequest.IsCompleted);
+            if (loadSettingsRequest.IsFaulted || !loadSettingsRequest.Result)
+            {throw new Exception("Failed to load settings files."); }
+            
             var stateLoaded = false;
-            _rootDi.Resolve<IProjectStateProvider>().LoadProjectState().Subscribe(_ => stateLoaded = true);
+            _rootDi.Resolve<IProjectStateProvider>().LoadProjectState(
+                _rootDi.Resolve<ISettingsProvider>())
+                .Subscribe(_ => stateLoaded = true);
             yield return new WaitUntil(() => stateLoaded);
 
             var preferences = _rootDi.Resolve<IProjectStateProvider>().ProjectProxy.Preferences.Value;

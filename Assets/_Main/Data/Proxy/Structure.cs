@@ -1,4 +1,5 @@
-﻿using R3;
+﻿using Constant;
+using R3;
 using UnityEngine;
 
 namespace Proxy
@@ -8,7 +9,7 @@ namespace Proxy
         public State.Structure Origin { get; }
         
         public string Id { get; }
-        public string TypeKey { get; }
+        public Structures TypeKey { get; }
         
         public ReactiveProperty<Vector3> Position { get; }
         

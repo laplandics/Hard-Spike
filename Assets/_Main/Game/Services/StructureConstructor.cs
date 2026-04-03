@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using ObservableCollections;
 using System.Collections.Generic;
+using Constant;
 
 namespace Game
 {
@@ -25,7 +26,7 @@ namespace Game
             structures.ObserveRemove().Subscribe(removeEvent => Deconstruct(removeEvent.Value));
         }
 
-        public bool AddStructure(string typeKey, Vector3 position)
+        public bool AddStructure(Structures typeKey, Vector3 position)
         {
             var command = new CmdCommandAddStructure(typeKey, position);
             var result = _cmd.Process(command);

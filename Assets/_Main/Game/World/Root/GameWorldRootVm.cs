@@ -1,5 +1,6 @@
 ﻿using Core;
 using ObservableCollections;
+using R3;
 using UnityEngine;
 
 namespace Game
@@ -7,12 +8,14 @@ namespace Game
     public class GameWorldRootVm : IRootViewModel
     {
         private GameWorldRootBinder _gameWorld;
-
+        
+        public ReactiveProperty<MapVm> MapVm { get; private set; }
         public IObservableCollection<StructureVm> StructureVms { get; }
         public MonoBehaviour Binder => _gameWorld;
 
-        public GameWorldRootVm(StructureConstructor constructor)
+        public GameWorldRootVm(MapCreator creator, StructureConstructor constructor)
         {
+            MapVm = creator.MapVm;
             StructureVms = constructor.StructureVms;
         }
         
