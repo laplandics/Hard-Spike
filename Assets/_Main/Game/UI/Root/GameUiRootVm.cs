@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using Utils;
+﻿using Core;
+using UnityEngine;
 
 namespace Game
 {
-    public class GameUiRootVm : IUiVm
+    public class GameUiRootVm : IRootViewModel
     {
         private GameUiRootBinder _gameUi;
 

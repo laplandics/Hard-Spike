@@ -7,11 +7,15 @@ namespace Proxy
     {
         public State.Project Origin { get; }
         
+        public ReactiveProperty<Preferences> Preferences { get; }
         public ObservableList<Structure> Structures { get; }
         
         public Project(State.Project origin)
         {
             Origin = origin;
+            
+            Preferences = new ReactiveProperty<Preferences>(new Preferences(Origin.preferences));
+            Preferences.Skip(1).Subscribe(preferences => Origin.preferences = preferences.Origin);
             
             Structures = new ObservableList<Structure>();
             Origin.structures.ForEach(structure => Structures.Add(new Structure(structure)));

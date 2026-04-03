@@ -7,14 +7,20 @@ namespace Menu
 {
     public class MenuBoot : MonoBehaviour
     {
-        public void Boot(DiContainer menuDi, out Subject<Unit> onExit)
+        public void Boot(DiContainer c, out Subject<Unit> onExit)
         {
             onExit = new Subject<Unit>();
             
-            menuDi.Register(_ => new Cam("MenuCamera"));
+            c.Register(_ => new Cam("MenuCamera"));
             
-            menuDi.Resolve<Cam>().Instantiate();
-            menuDi.Resolve<UiRootVm>().AddUi<MenuUiRootVm>(out var menuUiRootVm);
+            c.Register(_ => new MenuUiRootVm(), true);
+            
+            c.Resolve<UiProjectRoot>().AddUi(
+                c.Resolve<MenuUiRootVm>());
+            
+            c.Resolve<Cam>().Instantiate();
+            
+            Resources.UnloadUnusedAssets();
         }
     }
 }

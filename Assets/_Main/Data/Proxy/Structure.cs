@@ -7,7 +7,7 @@ namespace Proxy
     {
         public State.Structure Origin { get; }
         
-        public int Id { get; }
+        public string Id { get; }
         public string TypeKey { get; }
         
         public ReactiveProperty<Vector3> Position { get; }
@@ -19,7 +19,6 @@ namespace Proxy
             TypeKey = Origin.typeKey;
             
             Position = new ReactiveProperty<Vector3>(Origin.position);
-            
             Position.Skip(1).Subscribe(pos => Origin.position = pos);
         }
     }

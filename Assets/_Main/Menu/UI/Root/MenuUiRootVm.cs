@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using Utils;
+﻿using Core;
+using UnityEngine;
 
 namespace Menu
 {
-    public class MenuUiRootVm : IUiVm
+    public class MenuUiRootVm : IRootViewModel
     {
         private MenuUiRootBinder _menuUi;
 

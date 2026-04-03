@@ -1,10 +1,9 @@
 ﻿using Core;
 using UnityEngine;
-using Utils;
 
 namespace Boot
 {
-    public class BootUiRootVm : IUiVm
+    public class BootUiRootVm : IRootViewModel
     {
         private BootUiRootBinder _bootUi;
 
@@ -19,7 +18,7 @@ namespace Boot
 
         public void OnRemove()
         {
-            
+            Object.Destroy(_bootUi.gameObject);
         }
     }
 }

@@ -15,6 +15,13 @@ namespace State
         public Observable<bool> LoadProjectState()
         {
             ProjectProxy = null;
+
+#if UNITY_EDITOR
+            
+            Debug.LogWarning("Remove temporal editor code (Reset state)");
+            ResetProjectState();
+            
+#endif            
             
             if (!File.Exists(Path)) return ResetProjectState();
             
@@ -22,14 +29,6 @@ namespace State
             _projectState = JsonUtility.FromJson<Project>(json);
             ProjectProxy = new Proxy.Project(_projectState);
             
-
-            return Observable.Return(true);
-        }
-
-        public Observable<bool> SaveProjectState()
-        {
-            var json = JsonUtility.ToJson(_projectState, true);
-            File.WriteAllText(Path, json);
             return Observable.Return(true);
         }
 
@@ -41,15 +40,20 @@ namespace State
             return Observable.Return(true);
         }
 
+        public Observable<bool> SaveProjectState()
+        {
+            var json = JsonUtility.ToJson(_projectState, true);
+            File.WriteAllText(Path, json);
+            return Observable.Return(true);
+        }
+
         private void CreateProjectState()
         {
             Debug.LogWarning("Move new project state creation to settings");
             _projectState = new Project
             {
-                structures = new List<Structure>
-                {
-                    new() { typeKey = "First"}, new() { typeKey = "Second"}
-                }
+                preferences = new Preferences { vSync = 1, fps = -1, },
+                structures = new List<Structure>(),
             };
             ProjectProxy = new Proxy.Project(_projectState);
         }
