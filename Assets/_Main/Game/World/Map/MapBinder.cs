@@ -11,7 +11,7 @@ namespace Game
         public void Bind(MapVm vm)
         {
             _vm = vm;
-            mapRenderer.DrawMap(_vm.Grid.Value);
+            mapRenderer.DrawMap(_vm.Grid);
         }
     }
 }

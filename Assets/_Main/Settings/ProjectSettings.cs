@@ -6,6 +6,7 @@ namespace Settings
     public class ProjectSettings : ScriptableObject
     {
         public StructureSettings initialStructure;
-        public int gridRadius;
+        public MapSettings mapSettings;
+        
     }
 }

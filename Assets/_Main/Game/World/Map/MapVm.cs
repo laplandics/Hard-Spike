@@ -1,14 +1,13 @@
-﻿using R3;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
     public class MapVm
     {
-        public ReactiveProperty<GridInfo> Grid { get; }
+        public GridInfo Grid { get; }
         public MapBinder Binder { get; private set; }
 
-        public MapVm(ReactiveProperty<GridInfo> grid)
+        public MapVm(GridInfo grid)
         {
             Grid = grid;
         }

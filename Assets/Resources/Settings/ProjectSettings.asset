@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: ProjectSettings
   m_EditorClassIdentifier: Assembly-CSharp::Settings.ProjectSettings
   initialStructure: {fileID: 11400000, guid: 0e4a6305ea8b45645a34fff81a627aba, type: 2}
-  gridRadius: 32
+  mapSettings:
+    gridSize: {x: 64, y: 64}

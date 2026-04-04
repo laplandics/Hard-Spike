@@ -20,8 +20,10 @@ namespace Game
                 c.Resolve<IProjectStateProvider>().ProjectProxy));
             
             c.Register(_ => new Cam("GameCamera"));
+            c.Register(_ => new HexGenerator(), true);
             c.Register(_ => new GridGenerator(
-                c.Resolve<ISettingsProvider>().ProjectSettings), true);
+                c.Resolve<ISettingsProvider>().ProjectSettings.mapSettings,
+                c.Resolve<HexGenerator>()), true);
             c.Register(_ => new MapCreator(
                 c.Resolve<GridGenerator>()), true);
             c.Register(_ => new StructureConstructor(

@@ -33,7 +33,8 @@ namespace Game
 
         private void DestroyMap(MapVm mapVm)
         {
-            Destroy(_mapBinder);
+            if (_mapBinder == null) return;
+            Destroy(_mapBinder.gameObject);
         }
         
         private void AddStructure(StructureVm structureVm)
