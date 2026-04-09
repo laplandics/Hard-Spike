@@ -8,6 +8,7 @@ namespace Proxy
         public State.Project Origin { get; }
         
         public ReactiveProperty<Preferences> Preferences { get; }
+        public ObservableList<Hex> Hexes { get; }
         public ObservableList<Structure> Structures { get; }
         
         public Project(State.Project origin)
@@ -16,6 +17,11 @@ namespace Proxy
             
             Preferences = new ReactiveProperty<Preferences>(new Preferences(Origin.preferences));
             Preferences.Skip(1).Subscribe(preferences => Origin.preferences = preferences.Origin);
+            
+            Hexes = new ObservableList<Hex>();
+            Origin.hexes.ForEach(hex => Hexes.Add(new Hex(hex)));
+            Hexes.ObserveAdd().Subscribe(addEvent => Origin.hexes.Add(addEvent.Value.Origin));
+            Hexes.ObserveRemove().Subscribe(removeEvent => Origin.hexes.Remove(removeEvent.Value.Origin));
             
             Structures = new ObservableList<Structure>();
             Origin.structures.ForEach(structure => Structures.Add(new Structure(structure)));

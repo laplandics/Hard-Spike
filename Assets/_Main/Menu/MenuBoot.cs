@@ -11,7 +11,7 @@ namespace Menu
         {
             onExit = new Subject<Unit>();
             
-            c.Register(_ => new Cam("MenuCamera"));
+            c.Register(_ => new Cam("MenuCamera"), true);
             
             c.Register(_ => new MenuUiRootVm(), true);
             

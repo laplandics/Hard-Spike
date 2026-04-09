@@ -60,15 +60,16 @@ namespace State
                     fps = _settingsProvider.ApplicationSettings.fps
                 },
                 
-                structures = new List<Structure>
+                hexes = new List<Hex>
                 {
                     new()
                     {
-                        id = _settingsProvider.ProjectSettings.initialStructure.id,
-                        typeKey = _settingsProvider.ProjectSettings.initialStructure.typeKey,
+                        typeKey = _settingsProvider.ProjectSettings.initialHex.typeKey,
                         position = Vector3.zero
                     }
-                }
+                },
+                
+                structures = new List<Structure>()
             };
             
             ProjectProxy = new Proxy.Project(_projectState);

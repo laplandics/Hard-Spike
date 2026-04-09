@@ -15,7 +15,7 @@
         
         public const string CAMERA_PREFAB_PATH = "Camera/Cam";
         
-        public const string MAP_DIRECTORY_PATH = "Map/";
+        public const string HEXES_DIRECTORY_PATH = "Hex/";
         public const string STRUCTURES_DIRECTORY_PATH = "Structure/";
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Core;
 using ObservableCollections;
-using R3;
 using UnityEngine;
 
 namespace Game
@@ -9,14 +8,14 @@ namespace Game
     {
         private GameWorldRootBinder _gameWorld;
         
-        public ReactiveProperty<MapVm> MapVm { get; private set; }
         public IObservableCollection<StructureVm> StructureVms { get; }
+        public IObservableCollection<HexVm> HexVms { get; }
         public MonoBehaviour Binder => _gameWorld;
 
-        public GameWorldRootVm(MapCreator creator, StructureConstructor constructor)
+        public GameWorldRootVm(HexCreator hexCreator, StructureCreator structureCreator)
         {
-            MapVm = creator.MapVm;
-            StructureVms = constructor.StructureVms;
+            HexVms = hexCreator.HexVms;
+            StructureVms = structureCreator.StructureVms;
         }
         
         public void OnAdd(Transform root)

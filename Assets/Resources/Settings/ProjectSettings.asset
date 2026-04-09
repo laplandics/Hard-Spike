@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8954e4497445339d8a7fe8e73f35e8, type: 3}
   m_Name: ProjectSettings
   m_EditorClassIdentifier: Assembly-CSharp::Settings.ProjectSettings
-  initialStructure: {fileID: 11400000, guid: 0e4a6305ea8b45645a34fff81a627aba, type: 2}
-  mapSettings:
-    gridSize: {x: 64, y: 64}
+  initialHex: {fileID: 11400000, guid: 366fe957827b4cf409119cc076ee2510, type: 2}
+  gridSettings:
+    gridSize: {x: 4, y: 4}
