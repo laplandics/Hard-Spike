@@ -8,8 +8,7 @@ namespace Proxy
         public State.Project Origin { get; }
         
         public ReactiveProperty<Preferences> Preferences { get; }
-        public ObservableList<Hex> Hexes { get; }
-        public ObservableList<Structure> Structures { get; }
+        public ObservableList<Station> Stations { get; }
         
         public Project(State.Project origin)
         {
@@ -18,15 +17,10 @@ namespace Proxy
             Preferences = new ReactiveProperty<Preferences>(new Preferences(Origin.preferences));
             Preferences.Skip(1).Subscribe(preferences => Origin.preferences = preferences.Origin);
             
-            Hexes = new ObservableList<Hex>();
-            Origin.hexes.ForEach(hex => Hexes.Add(new Hex(hex)));
-            Hexes.ObserveAdd().Subscribe(addEvent => Origin.hexes.Add(addEvent.Value.Origin));
-            Hexes.ObserveRemove().Subscribe(removeEvent => Origin.hexes.Remove(removeEvent.Value.Origin));
-            
-            Structures = new ObservableList<Structure>();
-            Origin.structures.ForEach(structure => Structures.Add(new Structure(structure)));
-            Structures.ObserveAdd().Subscribe(addEvent => Origin.structures.Add(addEvent.Value.Origin));
-            Structures.ObserveRemove().Subscribe(removeEvent => Origin.structures.Remove(removeEvent.Value.Origin));
+            Stations = new ObservableList<Station>();
+            Origin.stations.ForEach(station => Stations.Add(new Station(station)));
+            Stations.ObserveAdd().Subscribe(addEvent => Origin.stations.Add(addEvent.Value.Origin));
+            Stations.ObserveRemove().Subscribe(removeEvent => Origin.stations.Remove(removeEvent.Value.Origin));
         }
     }
 }

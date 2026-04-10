@@ -1,15 +1,16 @@
 ﻿using System;
+using UnityEngine.SceneManagement;
 using System.Collections;
+using R3;
 using Cmd;
 using Core;
 using Game;
 using Menu;
-using R3;
 using Settings;
 using State;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Utils;
+using GameSpace;
 
 namespace Boot
 {
@@ -25,13 +26,13 @@ namespace Boot
         {
             _rootDi = new DiContainer();
             _rootDi.Register(_ => new Coroutines(), true);
-            _rootDi.Register(_ => new UiProjectRoot(), true);
+            _rootDi.Register(_ => new UiRoot(), true);
             _rootDi.Register(_ => new Cam("BootCamera"), true);
             _rootDi.Register<ISettingsProvider>(_ => new SoSettingsProvider(), true);
             _rootDi.Register<IProjectStateProvider>(_ => new JsonProjectStateProvider(), true);
             _rootDi.Register<ICommandProcessor>(_ => new CommandProcessor(), true);
             
-            _rootDi.Resolve<UiProjectRoot>().AddUi(new BootUiRootVm());
+            _rootDi.Resolve<UiRoot>().AddUi(new BootUiVm());
             _rootDi.Resolve<Cam>().Instantiate();
             
 #if UNITY_EDITOR

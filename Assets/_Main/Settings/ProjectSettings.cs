@@ -2,9 +2,9 @@
 
 namespace Settings
 {
-    [CreateAssetMenu(fileName = "ProjectSettings", menuName = "Configs/Settings/ProjectSettings")]
+    [CreateAssetMenu(fileName = "ProjectSettings", menuName = "Settings/Core/Project")]
     public class ProjectSettings : ScriptableObject
     {
-        public HexSettings initialHex;
+        public StationSettings initialStation;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using R3;
 using Settings;
@@ -52,27 +53,26 @@ namespace State
 
         private void CreateProjectState()
         {
-            _projectState = new Project
+            var state = new Project
             {
                 preferences = new Preferences
                 {
+                    fps = _settingsProvider.ApplicationSettings.fps,
                     vSync = _settingsProvider.ApplicationSettings.vSync,
-                    fps = _settingsProvider.ApplicationSettings.fps
                 },
                 
-                hexes = new List<Hex>
+                stations = new List<Station>
                 {
                     new()
                     {
-                        typeKey = _settingsProvider.ProjectSettings.initialHex.typeKey,
+                        id = Guid.NewGuid().ToString(),
+                        typeKey = _settingsProvider.ProjectSettings.initialStation.typeKey,
                         position = Vector3.zero
                     }
-                },
-                
-                structures = new List<Structure>()
+                }
             };
-            
-            ProjectProxy = new Proxy.Project(_projectState);
+
+            _projectState = state;
         }
     }
 }

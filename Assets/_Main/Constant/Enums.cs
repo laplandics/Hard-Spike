@@ -1,14 +1,17 @@
 ﻿namespace Constant
 {
-    public enum Hexes
-    {
-        Empty,
-        
-    }
-    
-    public enum Structures
+    public enum Stations
     {
         Default,
-        Citadel
+        Command,
+        Mining,
+        Extraction,
+        Production,
+        Ward,
+        Energy,
+        Logistic,
+        Science,
+        Yard,
+        Resident
     }
 }

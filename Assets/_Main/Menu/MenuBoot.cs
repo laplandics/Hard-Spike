@@ -1,4 +1,5 @@
 ﻿using Core;
+using GameSpace;
 using R3;
 using UnityEngine;
 using Utils;
@@ -13,11 +14,7 @@ namespace Menu
             
             c.Register(_ => new Cam("MenuCamera"), true);
             
-            c.Register(_ => new MenuUiRootVm(), true);
-            
-            c.Resolve<UiProjectRoot>().AddUi(
-                c.Resolve<MenuUiRootVm>());
-            
+            c.Resolve<UiRoot>().AddUi(new MenuUiVm());
             c.Resolve<Cam>().Instantiate();
             
             Resources.UnloadUnusedAssets();

@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e8954e4497445339d8a7fe8e73f35e8, type: 3}
-  m_Name: ProjectSettings
-  m_EditorClassIdentifier: Assembly-CSharp::Settings.ProjectSettings
-  initialStation: {fileID: 11400000, guid: 18b462bdf509a5c45bbb9ceaacc88dc5, type: 2}
+  m_Script: {fileID: 11500000, guid: 3c6345fd218a40a0a155fe1a45a37136, type: 3}
+  m_Name: Settings
+  m_EditorClassIdentifier: Assembly-CSharp::Settings.StationSettings

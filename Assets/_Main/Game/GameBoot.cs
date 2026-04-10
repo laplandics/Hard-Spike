@@ -1,11 +1,10 @@
 ﻿using Cmd;
-using Constant;
 using Core;
+using GameSpace;
 using R3;
 using State;
 using UnityEngine;
 using Utils;
-using Grid = Utils.Grid;
 
 namespace Game
 {
@@ -15,36 +14,21 @@ namespace Game
         {
             onExit = new Subject<Unit>();
             
-            c.Resolve<ICommandProcessor>().RegisterHandler(new CmdHandlerAddStructure(
-                c.Resolve<IProjectStateProvider>().ProjectProxy));
-            c.Resolve<ICommandProcessor>().RegisterHandler(new CmdHandlerRemoveStructure(
-                c.Resolve<IProjectStateProvider>().ProjectProxy));
-            c.Resolve<ICommandProcessor>().RegisterHandler(new CmdHandlerAddHex(
-                c.Resolve<IProjectStateProvider>().ProjectProxy));
+            c.Resolve<ICommandProcessor>().RegisterHandler(new CmdHandlerAddStation(
+                c.Resolve<IProjectStateProvider>().ProjectProxy.Stations));
+            c.Resolve<ICommandProcessor>().RegisterHandler(new CmdHandlerRemoveStation(
+                c.Resolve<IProjectStateProvider>().ProjectProxy.Stations));
             
-            
-            c.Register(_ => new Grid(), true);
+            c.Register(_ => new WorldRoot(), true);
             c.Register(_ => new Cam("GameCamera"), true);
-            c.Register(_ => new HexCreator(
-                c.Resolve<Grid>(),
-                c.Resolve<IProjectStateProvider>().ProjectProxy.Hexes,
-                c.Resolve<ICommandProcessor>()), true);
-            c.Register(_ => new StructureCreator(
-                c.Resolve<IProjectStateProvider>().ProjectProxy.Structures,
-                c.Resolve<ICommandProcessor>()), true);
+            c.Register(_ => new StationCreator(
+                c.Resolve<ICommandProcessor>(),
+                c.Resolve<WorldRoot>(),
+                c.Resolve<IProjectStateProvider>().ProjectProxy.Stations), true);
             
-            c.Register(_ => new WorldSceneRoot(), true);
-            c.Register(_ => new GameUiRootVm(), true);
-            c.Register(_ => new GameWorldRootVm(
-                c.Resolve<HexCreator>(),
-                c.Resolve<StructureCreator>()), true);
-            
-            
-            c.Resolve<UiProjectRoot>().AddUi(
-                c.Resolve<GameUiRootVm>());
-            c.Resolve<WorldSceneRoot>().AddWorld(
-                c.Resolve<GameWorldRootVm>());
+            c.Resolve<UiRoot>().AddUi(new GameUiVm());
             c.Resolve<Cam>().Instantiate();
+            c.Resolve<StationCreator>();
             
             Resources.UnloadUnusedAssets();
         }

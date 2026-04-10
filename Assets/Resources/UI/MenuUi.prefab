@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1140470860518162141}
   - component: {fileID: 3712635878644262042}
-  - component: {fileID: 796121960595490602}
+  - component: {fileID: -2731540716489977408}
   m_Layer: 0
   m_Name: MenuUi
   m_TagString: Untagged
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
---- !u!114 &796121960595490602
+--- !u!114 &-2731540716489977408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,6 +65,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3819190622524441225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 813d6e4d39854e789e840a457da2dd5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 17cfb15ba4eb4025a60ae65115c90984, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Menu.MenuUiRootBinder
+  m_EditorClassIdentifier: Assembly-CSharp::Menu.MenuUiBinder
