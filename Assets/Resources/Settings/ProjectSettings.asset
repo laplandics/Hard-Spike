@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8954e4497445339d8a7fe8e73f35e8, type: 3}
   m_Name: ProjectSettings
   m_EditorClassIdentifier: Assembly-CSharp::Settings.ProjectSettings
-  initialStation: {fileID: 11400000, guid: 18b462bdf509a5c45bbb9ceaacc88dc5, type: 2}
+  initialStation: {fileID: 11400000, guid: ef55f17caba328949a94308132e20f2c, type: 2}

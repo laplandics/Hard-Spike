@@ -13,7 +13,7 @@ namespace Game
     {
         private readonly ICommandProcessor _cmd;
         private readonly WorldRoot _root;
-        private Dictionary<string, StationVm> _stationVms = new();
+        private readonly Dictionary<string, StationVm> _stationVms = new();
 
         public StationCreator(ICommandProcessor cmd, WorldRoot root, IObservableCollection<Station> stations)
         {

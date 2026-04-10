@@ -68,3 +68,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfc0d61c8ce4bd48c872ef5a7d7b48a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameUiBinder
+  document: {fileID: 5674161093477384080}

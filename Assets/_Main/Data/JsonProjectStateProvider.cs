@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using R3;
-using Settings;
 using UnityEngine;
+using Utils;
 
 namespace State
 {
@@ -12,15 +10,15 @@ namespace State
         public Proxy.Project ProjectProxy { get; private set; }
         
         private Project _projectState;
-        private ISettingsProvider _settingsProvider;
+        private DataInitializer _dataInitializer;
         
         private static string Path => Application.persistentDataPath + Constant.Paths.PROJECT_STATE_PATH;
         
-        public Observable<bool> LoadProjectState(ISettingsProvider settingsProvider)
+        public Observable<bool> LoadProjectState(DataInitializer dataInitializer)
         {
             ProjectProxy = null;
-            _settingsProvider = settingsProvider;
-
+            _dataInitializer = dataInitializer;
+            
 #if UNITY_EDITOR
             
             Debug.LogWarning("Remove temporal editor code (Reset state)");
@@ -53,26 +51,7 @@ namespace State
 
         private void CreateProjectState()
         {
-            var state = new Project
-            {
-                preferences = new Preferences
-                {
-                    fps = _settingsProvider.ApplicationSettings.fps,
-                    vSync = _settingsProvider.ApplicationSettings.vSync,
-                },
-                
-                stations = new List<Station>
-                {
-                    new()
-                    {
-                        id = Guid.NewGuid().ToString(),
-                        typeKey = _settingsProvider.ProjectSettings.initialStation.typeKey,
-                        position = Vector3.zero
-                    }
-                }
-            };
-
-            _projectState = state;
+            _projectState = _dataInitializer.Initialize();
         }
     }
 }

@@ -68,3 +68,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17cfb15ba4eb4025a60ae65115c90984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Menu.MenuUiBinder
+  document: {fileID: 3712635878644262042}

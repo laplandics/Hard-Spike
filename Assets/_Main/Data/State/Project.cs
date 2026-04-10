@@ -8,5 +8,6 @@ namespace State
     {
         public Preferences preferences;
         public List<Station> stations;
+        public List<Resource> resources;
     }
 }

@@ -68,3 +68,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cd322b2aba4d9b94589e4e4ef2ccda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boot.BootUiBinder
+  document: {fileID: 2244557522394386212}

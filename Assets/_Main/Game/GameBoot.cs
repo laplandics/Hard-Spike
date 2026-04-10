@@ -18,6 +18,10 @@ namespace Game
                 c.Resolve<IProjectStateProvider>().ProjectProxy.Stations));
             c.Resolve<ICommandProcessor>().RegisterHandler(new CmdHandlerRemoveStation(
                 c.Resolve<IProjectStateProvider>().ProjectProxy.Stations));
+            c.Resolve<ICommandProcessor>().RegisterHandler(new CmdHandlerReceiveResource(
+                c.Resolve<IProjectStateProvider>().ProjectProxy.Resources));
+            c.Resolve<ICommandProcessor>().RegisterHandler(new CmdHandlerSpendResource(
+                c.Resolve<IProjectStateProvider>().ProjectProxy.Resources));
             
             c.Register(_ => new WorldRoot(), true);
             c.Register(_ => new Cam("GameCamera"), true);
@@ -25,6 +29,10 @@ namespace Game
                 c.Resolve<ICommandProcessor>(),
                 c.Resolve<WorldRoot>(),
                 c.Resolve<IProjectStateProvider>().ProjectProxy.Stations), true);
+            c.Register(_ => new ResourceCreator(
+                c.Resolve<ICommandProcessor>(),
+                c.Resolve<UiRoot>(),
+                c.Resolve<IProjectStateProvider>().ProjectProxy.Resources), true);
             
             c.Resolve<UiRoot>().AddUi(new GameUiVm());
             c.Resolve<Cam>().Instantiate();

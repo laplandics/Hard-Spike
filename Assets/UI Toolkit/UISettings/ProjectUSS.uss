@@ -4,3 +4,9 @@
 .bg {
     background-color: rgb(70, 70, 70);
 }
+
+.topPanel {
+    flex-grow: 0;
+    background-color: rgba(38, 38, 38, 0.71);
+    padding-top: 60px;
+}

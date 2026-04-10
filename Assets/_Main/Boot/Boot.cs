@@ -29,6 +29,7 @@ namespace Boot
             _rootDi.Register(_ => new UiRoot(), true);
             _rootDi.Register(_ => new Cam("BootCamera"), true);
             _rootDi.Register<ISettingsProvider>(_ => new SoSettingsProvider(), true);
+            _rootDi.Register(_ => new DataInitializer(_rootDi.Resolve<ISettingsProvider>()), true);
             _rootDi.Register<IProjectStateProvider>(_ => new JsonProjectStateProvider(), true);
             _rootDi.Register<ICommandProcessor>(_ => new CommandProcessor(), true);
             
@@ -64,7 +65,7 @@ namespace Boot
             
             var stateLoaded = false;
             _rootDi.Resolve<IProjectStateProvider>().LoadProjectState(
-                _rootDi.Resolve<ISettingsProvider>())
+                _rootDi.Resolve<DataInitializer>())
                 .Subscribe(_ => stateLoaded = true);
             yield return new WaitUntil(() => stateLoaded);
 

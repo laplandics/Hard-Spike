@@ -9,6 +9,7 @@ namespace Proxy
         
         public ReactiveProperty<Preferences> Preferences { get; }
         public ObservableList<Station> Stations { get; }
+        public ObservableList<Resource> Resources { get; }
         
         public Project(State.Project origin)
         {
@@ -21,6 +22,11 @@ namespace Proxy
             Origin.stations.ForEach(station => Stations.Add(new Station(station)));
             Stations.ObserveAdd().Subscribe(addEvent => Origin.stations.Add(addEvent.Value.Origin));
             Stations.ObserveRemove().Subscribe(removeEvent => Origin.stations.Remove(removeEvent.Value.Origin));
+            
+            Resources = new ObservableList<Resource>();
+            Origin.resources.ForEach(resource => Resources.Add(new Resource(resource)));
+            Resources.ObserveAdd().Subscribe(addEvent => Origin.resources.Add(addEvent.Value.Origin));
+            Resources.ObserveRemove().Subscribe(removeEvent => Origin.resources.Remove(removeEvent.Value.Origin));
         }
     }
 }

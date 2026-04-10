@@ -9,7 +9,7 @@ namespace GameSpace
     public class UiRoot: IDisposable
     {
         private readonly UiContainer _uiContainer;
-        private readonly List<IViewModel> _currentVms = new();
+        private IViewModel _currentVm;
         
         public UiRoot()
         {
@@ -20,19 +20,29 @@ namespace GameSpace
         public void AddUi(IViewModel uiVm)
         {
             uiVm.OnAdd(_uiContainer.transform);
-            _currentVms.Add(uiVm);
+            _currentVm = uiVm;
+        }
+
+        public void AddUiElement(IViewModel uiElement)
+        {
+            uiElement.OnAdd(_currentVm.Binder.transform);
         }
 
         public void RemoveUi(IViewModel uiVm)
         {
             uiVm.OnRemove();
-            _currentVms.Remove(uiVm);
+            _currentVm = null;
+        }
+
+        public void RemoveUiElement(IViewModel uiElement)
+        {
+            uiElement.OnRemove();
         }
 
         public void Dispose()
         {
-            foreach (var vm in _currentVms) vm.OnRemove();
-            _currentVms.Clear();
+            _currentVm.OnRemove();
+            Object.Destroy(_uiContainer.transform.GetChild(0).gameObject);
         }
         
         internal class UiContainer : MonoBehaviour {}
